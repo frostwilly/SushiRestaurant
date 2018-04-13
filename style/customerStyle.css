@@ -1,13 +1,26 @@
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-48 { font-size: 48px; margin: 0 5%; }
 .material-icons.md-48:hover { cursor: pointer; }
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+body{
+    background-image: url('../images/woodTexture.jpg');
+    background-size: 200px;
+    text-shadow: 5px 5px 7px rgba(0, 0, 0, 0.4);
+}
+
+.shadowbox{
+    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.4);
+}
 
 .header{
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 2;
-    background: white;
+    background-image: url('../images/hardwood.jpg');
     text-align: center;
+    left:0;
 }
 
 .promo , .reguler{
@@ -15,32 +28,30 @@
     width: 100%;
 }
 
+.menubox{
+    position: relative;
+    float: left;
+    margin: 8px;
+}
+
 @media screen and (orientation:landscape){
     .menubox{
-        position: relative;
         width: 15vw;
         height: 15vw;
-        float: left;
-        margin: 8px;
     }
 }
 
 @media screen and (orientation:landscape) and (max-width: 1000px){
     .menubox{
-        position: relative;
         width: 45vw;
         height: 45vw;
-        float: left;
-        margin: 8px;
     }
 }
 
 @media screen and (orientation:portrait){
     .menubox{
-        position: relative;
         width: 80vw;
         height: 80vw;
-        float: left;
         left:50%;
         transform: translateX(-50%);
         margin: 8px 0;

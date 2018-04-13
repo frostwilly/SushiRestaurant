@@ -17,13 +17,13 @@
                 <tr>
                     <td>Pika</td>
                     <td>Rp. 10.000</td>
-                    <td class="tdquantity"><input type="number" min="1" max="99" value="1"></td>
+                    <td class="tdquantity"><input class="employeeInput shadowbox" type="number" min="1" max="99" value="1"></td>
                     <td>Rp. 10.000</td>
                 </tr>
                 <tr>
                     <td>chu</td>
                     <td>Rp. 30.000</td>
-                    <td class="tdquantity"><input type="number" min="1" max="99" value="10"></td>
+                    <td class="tdquantity"><input class="employeeInput shadowbox" type="number" min="1" max="99" value="10"></td>
                     <td>Rp. 300.000</td>
                 </tr>
                 <tr><td class="borderedunderline" colspan="4"></td></tr>
@@ -32,7 +32,7 @@
                     <td>Rp. 310.000</td>
                 </tr>
                 <tr>
-                    <th colspan="4"><br><input style='padding: 10px; border-radius: 10px' type='submit' value='Payment'></th>
+                    <th colspan="4"><br><input class='employeeInput woodbutton shadowbox' type='submit' value='Payment'></th>
                 </tr>
             </table>
         </form>

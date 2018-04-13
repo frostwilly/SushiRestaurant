@@ -10,10 +10,10 @@
     </head>
     <body>
 
-        <div class="header">
-            <i onclick="alert('Waiter called');" class="material-icons md-48">notifications</i>
-            <i id="cartBtn" class="material-icons md-48">shopping_cart</i>
-            <i id="billBtn" class="material-icons md-48">format_list_numbered</i>
+        <div class="header shadowbox">
+            <i onclick="alert('Waiter called');" class="material-icons md-light md-48">notifications</i>
+            <i id="cartBtn" class="material-icons md-light md-48">shopping_cart</i>
+            <i id="billBtn" class="material-icons md-light md-48">format_list_numbered</i>
         </div>
         <div style="margin-bottom: 50px"></div>
         <?php include_once './promoMenu.php'; ?>
@@ -23,7 +23,7 @@
         <div id="modalCart" class="modal">
 
             <!-- Modal content for Cart -->
-            <div class="modal-content">
+            <div class="modal-content shadowbox">
                 <span class="close">&times;</span>
                 <h1>Cart</h1>
                 <table class="modaltable">
@@ -33,87 +33,29 @@
                     </tr>
                     <tr>
                         <td>Pika</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
+                        <td class="tdquantity"><input style="padding: 5px; border-radius: 10px" type="number" min="1" max="99"></td>
                     </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td class="tdquantity"><input type="number" min="1" max="99"></td>
-                    </tr>
+                    <?php
+                    for ($i = 0; $i < 15; $i++) {
+                        ?>
+                        <tr>
+                            <td>chu</td>
+                            <td class="tdquantity"><input style="padding: 5px; border-radius: 10px" type="number" min="1" max="99"></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                 </table>
                 <br>
-                <input type="submit">
+                <input style="padding: 10px; border: 0; border-radius: 10px" type="submit">
             </div>
         </div>
-        
+
         <!-- The Modal for Cart -->
         <div id="modalBill" class="modal">
 
             <!-- Modal content for Cart -->
-            <div class="modal-content">
+            <div class="modal-content shadowbox">
                 <span class="close">&times;</span>
                 <h1>Bill</h1>
                 <table class="modaltable">

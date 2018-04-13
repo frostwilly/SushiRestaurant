@@ -9,8 +9,8 @@
             <table class="tableverticalhorizontalcenter">
                 <tr><th><h1>Cashier</h1></th></tr>
                 <tr><td>Bill's ID</td></tr>
-                <tr><td><input class="employeeInput" type="text" name="billID" placeholder="Bill's ID"></td></tr>
-                <tr><th><br><input class="employeeInput" type='submit' value='Check'></th></tr>
+                <tr><td><input class="employeeInput shadowbox" type="text" name="billID" placeholder="Bill's ID"></td></tr>
+                <tr><th><br><input class="employeeInput woodbutton shadowbox" type='submit' value='Check'></th></tr>
             </table>
         </form>
     </body>
