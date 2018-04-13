@@ -1,0 +1,38 @@
+.tableverticalhorizontalcenter{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-60%);
+}
+
+.employeeInput{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.checkbilltable{
+    width: 50%;
+}
+
+@media screen  and (max-width: 1000px){
+    .checkbilltable{
+        width: 80%;
+    }
+}
+
+.checkbilltable th{
+    text-align: left;
+}
+
+.tdquantity{
+    width: 10%
+}
+
+.tdquantity input{
+    width: 90%;
+}
+
+.borderedunderline{
+    border-bottom: 1px solid #000;
+}
