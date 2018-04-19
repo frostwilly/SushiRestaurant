@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2018 at 03:45 PM
+-- Generation Time: Apr 19, 2018 at 05:30 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `sushi_database`
 --
+CREATE DATABASE IF NOT EXISTS `sushi_database` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `sushi_database`;
 
 -- --------------------------------------------------------
 
@@ -28,6 +30,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `cookorder`
 --
 
+DROP TABLE IF EXISTS `cookorder`;
 CREATE TABLE `cookorder` (
   `id` int(11) NOT NULL,
   `order_id` int(11) DEFAULT NULL,
@@ -50,6 +53,7 @@ INSERT INTO `cookorder` (`id`, `order_id`, `cooking_status`, `employee_id`) VALU
 -- Table structure for table `employees`
 --
 
+DROP TABLE IF EXISTS `employees`;
 CREATE TABLE `employees` (
   `id` int(11) NOT NULL,
   `username` varchar(40) NOT NULL,
@@ -72,6 +76,7 @@ INSERT INTO `employees` (`id`, `username`, `password`, `job_title`) VALUES
 -- Table structure for table `menuorder`
 --
 
+DROP TABLE IF EXISTS `menuorder`;
 CREATE TABLE `menuorder` (
   `id` int(11) NOT NULL,
   `order_id` int(11) DEFAULT NULL,
@@ -99,23 +104,25 @@ INSERT INTO `menuorder` (`id`, `order_id`, `menu_id`, `quantity`, `employee_id`)
 -- Table structure for table `menus`
 --
 
+DROP TABLE IF EXISTS `menus`;
 CREATE TABLE `menus` (
   `id` int(11) NOT NULL,
   `name` varchar(40) NOT NULL,
-  `price` int(11) NOT NULL
+  `price` int(11) NOT NULL,
+  `category` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `menus`
 --
 
-INSERT INTO `menus` (`id`, `name`, `price`) VALUES
-(1, 'foodA', 5000),
-(2, 'foodB', 10000),
-(3, 'foodC', 15000),
-(4, 'drinkA', 5000),
-(5, 'drinkB', 6000),
-(6, 'drinkC', 7000);
+INSERT INTO `menus` (`id`, `name`, `price`, `category`) VALUES
+(1, 'foodA', 5000, 'promo'),
+(2, 'foodB', 10000, 'reguler'),
+(3, 'foodC', 15000, 'promo'),
+(4, 'drinkA', 5000, 'reguler'),
+(5, 'drinkB', 6000, 'promo'),
+(6, 'drinkC', 7000, 'reguler');
 
 -- --------------------------------------------------------
 
@@ -123,6 +130,7 @@ INSERT INTO `menus` (`id`, `name`, `price`) VALUES
 -- Table structure for table `orders`
 --
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `table_number` int(11) NOT NULL
@@ -143,6 +151,7 @@ INSERT INTO `orders` (`id`, `table_number`) VALUES
 -- Table structure for table `payments`
 --
 
+DROP TABLE IF EXISTS `payments`;
 CREATE TABLE `payments` (
   `id` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
