@@ -31,6 +31,15 @@ $(document).on("click", "div.menubox", function () {
     tbdy.appendChild(tr);
     table.appendChild(tbdy);
     
+    var seen = {};
+    $('table tr').each(function () {
+        var txt = $(this).text();
+        if (seen[txt])
+            $(this).remove();
+        else
+            seen[txt] = true;
+    });
+    
     var y = document.getElementById("snackbar");
 
     // Add the "show" class to DIV
