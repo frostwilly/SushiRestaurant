@@ -13,7 +13,7 @@
 		<script src="javascript/cart.js"></script>
 		
         <div class="header shadowbox">
-            <i onclick="alert('Waiter called');" class="material-icons md-light md-48">notifications</i>
+            <i onclick="callWaiter()" class="material-icons md-light md-48">notifications</i>
             <i id="cartBtn" class="material-icons md-light md-48">shopping_cart</i>
             <i id="billBtn" class="material-icons md-light md-48">format_list_numbered</i>
         </div>
@@ -36,6 +36,9 @@
 		
         <?php include_once './promoMenu.php'; ?>
         <?php include_once './regulerMenu.php'; ?>
+        
+        <!-- The Snackbar for item added to cart -->
+        <div id="snackbar"></div>
 
         <!-- The Modal for Cart -->
         <div id="modalCart" class="modal">
