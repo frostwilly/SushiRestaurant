@@ -32,6 +32,9 @@
 		
         <?php include_once './promoMenu.php'; ?>
         <?php include_once './regulerMenu.php'; ?>
+        
+        <!-- The Snackbar for item added to cart -->
+        <div id="addedToCart"></div>
 
         <!-- The Modal for Cart -->
         <div id="modalCart" class="modal">
