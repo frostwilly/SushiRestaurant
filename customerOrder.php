@@ -21,7 +21,11 @@
 		
 		<?php
 			session_start();
+			require_once 'controller/rb.php';
+			R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
 			include_once("controller/MenuDAO.php");
+			include_once("controller/OrderDAO.php");
+			include_once("controller/MenuOrderDAO.php");
 			include_once('model/PromoMenuListIterator.php');
 			include_once('model/RegulerMenuListIterator.php');
 			$m = new MenuDAO();
@@ -44,20 +48,20 @@
                 <span class="close">&times;</span>
                 <h1>Cart</h1>
 				<form method="post" action="#">
-                <table class="modaltable" id="cart">
-                    <tr>
-                        <th>Order</th>
-                        <th>Qty</th>
-                    </tr>
-					<!--
-                    <tr>
-                        <td>Pika</td>
-                        <td class="tdquantity"><input style="padding: 5px; border-radius: 10px" type="number" min="1" max="99"></td>
-                    </tr>
-					-->
-                </table>
-                <br>
-                <input style="padding: 10px; border: 0; border-radius: 10px" type="submit" name="btn_submit">
+					<table class="modaltable" id="cart">
+						<tr>
+							<th>Order</th>
+							<th>Qty</th>
+						</tr>
+						<!--
+						<tr>
+							<td>Pika</td>
+							<td class="tdquantity"><input style="padding: 5px; border-radius: 10px" type="number" min="1" max="99"></td>
+						</tr>
+						-->
+					</table>
+					<br>
+					<input style="padding: 10px; border: 0; border-radius: 10px" type="submit" name="btn_submit">
 				</form>
             </div>
         </div>
@@ -80,13 +84,17 @@
 					<?php
 						if(isset($_POST['btn_submit']))
 						{
+							$o = new OrderDAO();
+							$mo = new MenuOrderDAO();
 							$grandTotal = 0;
+							$id = $o->insert(1);
 							foreach($_POST['id'] as $key => $value)
 							{
 								$data = $m->getOne($value);
 								$qty = $_POST['qty'][$key] != "" ? $_POST['qty'][$key] : 0;
 								$total = $data->getPrice()*$qty;
 								$grandTotal += $total;
+								$mo->insert($id, $value, $qty, 2);
 								?>
 								
 					<tr>
