@@ -1,6 +1,6 @@
 $(document).on( "click", "div.menubox.shadowbox", function() {
 	var id = $(this).find(".foodid").val();
-	var name = $(this).find(".foodname").text().replace("Makanan ","");
+	var name = $(this).find(".foodname").text();
 	
 	var table = document.getElementById("cart");
 	var tbdy = document.createElement('tbody');

@@ -1,6 +1,5 @@
 <?php
-	require 'rb.php';
-	R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
+	require_once 'rb.php';
 	include_once('model/MenuItem.php');
 	include_once('model/MenuList.php');
 	
