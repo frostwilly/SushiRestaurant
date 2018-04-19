@@ -31,7 +31,7 @@ $(document).on("click", "div.menubox", function () {
     tbdy.appendChild(tr);
     table.appendChild(tbdy);
     
-    var y = document.getElementById("addedToCart");
+    var y = document.getElementById("snackbar");
 
     // Add the "show" class to DIV
     y.innerHTML = name + " added to cart.";
@@ -42,3 +42,16 @@ $(document).on("click", "div.menubox", function () {
         y.className = y.className.replace("show", "");
     }, 3000);
 });
+
+function callWaiter(){
+    var y = document.getElementById("snackbar");
+
+    // Add the "show" class to DIV
+    y.innerHTML = "Call waiter done.";
+    y.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function () {
+        y.className = y.className.replace("show", "");
+    }, 3000);
+}
