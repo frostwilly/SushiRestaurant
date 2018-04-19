@@ -9,13 +9,29 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
-
         <div class="header shadowbox">
             <i onclick="alert('Waiter called');" class="material-icons md-light md-48">notifications</i>
             <i id="cartBtn" class="material-icons md-light md-48">shopping_cart</i>
             <i id="billBtn" class="material-icons md-light md-48">format_list_numbered</i>
         </div>
         <div style="margin-bottom: 50px"></div>
+		
+		<?php
+			include_once("controller/MenuDAO.php");
+			include_once('model/PromoMenuListIterator.php');
+			include_once('model/RegulerMenuListIterator.php');
+			$m = new MenuDAO();
+			$data = $m::getAll();
+			$promoIterator = new PromoMenuListIterator($data);
+			$regulerIterator = new RegulerMenuListIterator($data);
+			
+			/*
+			echo "<pre>";
+			print_r($data);
+			echo "</pre>";
+			*/
+		?>
+		
         <?php include_once './promoMenu.php'; ?>
         <?php include_once './regulerMenu.php'; ?>
 
