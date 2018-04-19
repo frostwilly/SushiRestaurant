@@ -9,6 +9,9 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
+		<script src="javascript/jquery-3.3.1.min.js"></script>
+		<script src="javascript/cart.js"></script>
+		
         <div class="header shadowbox">
             <i onclick="alert('Waiter called');" class="material-icons md-light md-48">notifications</i>
             <i id="cartBtn" class="material-icons md-light md-48">shopping_cart</i>
@@ -17,19 +20,14 @@
         <div style="margin-bottom: 50px"></div>
 		
 		<?php
+			session_start();
 			include_once("controller/MenuDAO.php");
 			include_once('model/PromoMenuListIterator.php');
 			include_once('model/RegulerMenuListIterator.php');
 			$m = new MenuDAO();
-			$data = $m::getAll();
+			$data = $m->getAll();
 			$promoIterator = new PromoMenuListIterator($data);
 			$regulerIterator = new RegulerMenuListIterator($data);
-			
-			/*
-			echo "<pre>";
-			print_r($data);
-			echo "</pre>";
-			*/
 		?>
 		
         <?php include_once './promoMenu.php'; ?>
@@ -42,28 +40,22 @@
             <div class="modal-content shadowbox">
                 <span class="close">&times;</span>
                 <h1>Cart</h1>
-                <table class="modaltable">
+				<form method="post" action="#">
+                <table class="modaltable" id="cart">
                     <tr>
                         <th>Order</th>
                         <th>Qty</th>
                     </tr>
+					<!--
                     <tr>
                         <td>Pika</td>
                         <td class="tdquantity"><input style="padding: 5px; border-radius: 10px" type="number" min="1" max="99"></td>
                     </tr>
-                    <?php
-                    for ($i = 0; $i < 15; $i++) {
-                        ?>
-                        <tr>
-                            <td>chu</td>
-                            <td class="tdquantity"><input style="padding: 5px; border-radius: 10px" type="number" min="1" max="99"></td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
+					-->
                 </table>
                 <br>
-                <input style="padding: 10px; border: 0; border-radius: 10px" type="submit">
+                <input style="padding: 10px; border: 0; border-radius: 10px" type="submit" name="btn_submit">
+				</form>
             </div>
         </div>
 
@@ -81,22 +73,36 @@
                         <th>Qty</th>
                         <th>Total</th>
                     </tr>
-                    <tr>
-                        <td>Pika</td>
-                        <td>Rp. 10.000</td>
-                        <td class="tdquantity">1</td>
-                        <td>Rp. 10.000</td>
+					
+					<?php
+						if(isset($_POST['btn_submit']))
+						{
+							$grandTotal = 0;
+							foreach($_POST['id'] as $key => $value)
+							{
+								$data = $m->getOne($value);
+								$qty = $_POST['qty'][$key] != "" ? $_POST['qty'][$key] : 0;
+								$total = $data->getPrice()*$qty;
+								$grandTotal += $total;
+								?>
+								
+					<tr>
+                        <td><?php echo $data->getName(); ?></td>
+                        <td>Rp. <?php echo $data->getPrice(); ?></td>
+                        <td class="tdquantity"><?php echo $qty; ?></td>
+                        <td>Rp. <?php echo $total; ?></td>
                     </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td>Rp. 30.000</td>
-                        <td class="tdquantity">10</td>
-                        <td>Rp. 300.000</td>
-                    </tr>
+								
+								<?php
+							}
+							session_unset();
+						}
+					?>
+					
                     <tr><td class="borderedunderline" colspan="4"></td></tr>
                     <tr>
                         <td colspan="3">Grand total</td>
-                        <td>Rp. 310.000</td>
+                        <td>Rp. <?php echo $grandTotal; ?></td>
                     </tr>
                 </table>
             </div>

@@ -17,5 +17,12 @@
 			}
 			return $list;
 		}
+		
+		function getOne($id)
+		{
+			$result = R::findOne('menus', ' id = ? ',array($id));
+			$item = new MenuItem($result->id, $result->name, $result->price, $result->category);
+			return $item;
+		}
 	}
 ?>
