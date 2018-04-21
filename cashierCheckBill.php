@@ -6,7 +6,7 @@
     </head>
     <body>
         <form method="post">
-            <table class="checkbilltable tableverticalhorizontalcenter">
+            <table class="checkbilltable tableverticalhorizontalcenter tablebackgroundbordered">
                 <tr><th colspan="4"><h1>Bill</h1></th></tr>
                 <tr>
                     <th>Order</th>

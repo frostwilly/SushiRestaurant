@@ -52,3 +52,10 @@ body{
 .borderedunderline{
     border-bottom: 1px solid #000;
 }
+
+.tablebackgroundbordered{
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.4);
+}
