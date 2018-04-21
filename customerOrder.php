@@ -113,7 +113,11 @@
                     <tr><td class="borderedunderline" colspan="4"></td></tr>
                     <tr>
                         <td colspan="3">Grand total</td>
-                        <td>Rp. <?php echo $grandTotal; ?></td>
+                        <td>Rp. <?php 
+                            if(isset($grandTotal)){
+                                echo $grandTotal;
+                            }
+                        ?></td>
                     </tr>
                 </table>
             </div>
