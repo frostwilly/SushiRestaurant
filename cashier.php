@@ -6,7 +6,7 @@
     </head>
     <body>
         <form method="post" action="cashierCheckBill.php">
-            <table class="tableverticalhorizontalcenter">
+            <table class="tableverticalhorizontalcenter tablebackgroundbordered">
                 <tr><th><h1>Cashier</h1></th></tr>
                 <tr><td>Bill's ID</td></tr>
                 <tr><td><input class="employeeInput shadowbox" type="text" name="billID" placeholder="Bill's ID"></td></tr>
