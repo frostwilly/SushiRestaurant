@@ -5,6 +5,8 @@
         <link rel="stylesheet" type="text/css" href="./style/employeeStyle.css">
     </head>
     <body>
+		<a href="index.php">Logout</a>
+		
         <form method="post" action="cashierCheckBill.php">
             <table class="tableverticalhorizontalcenter">
                 <tr><th><h1>Cashier</h1></th></tr>
