@@ -29,7 +29,7 @@ and open the template in the editor.
 					else if($employee->getJobTitle() == 'waiter')
 						header('Location: cashier.php');
 					else
-						header('Location: cashier.php');
+						header('Location: chef.php');
 				}
 				else
 					echo "<script type='text/javascript'>alert('Wrong username or password!');</script>";

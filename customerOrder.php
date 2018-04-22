@@ -20,6 +20,7 @@
         <div style="margin-bottom: 50px"></div>
 		
 		<?php
+			include_once("model/Guest.php");
 			session_start();
 			require_once 'controller/rb.php';
 			R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
@@ -28,6 +29,14 @@
 			include_once("controller/MenuOrderDAO.php");
 			include_once('model/PromoMenuListIterator.php');
 			include_once('model/RegulerMenuListIterator.php');
+			
+			if(isset($_SESSION['guest']))
+			{
+				$guest = $_SESSION['guest'];
+				$id = $guest->getId();
+				echo "Welcome! This is table $id";
+			}
+			
 			$m = new MenuDAO();
 			$data = $m->getAll();
 			$promoIterator = new PromoMenuListIterator($data);
