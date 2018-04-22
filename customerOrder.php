@@ -62,22 +62,16 @@
             <div class="modal-content shadowbox">
                 <span class="close">&times;</span>
                 <h1>Cart</h1>
-				<form method="post" action="#">
-					<table class="modaltable" id="cart">
-						<tr>
-							<th>Order</th>
-							<th>Qty</th>
-						</tr>
-						<!--
-						<tr>
-							<td>Pika</td>
-							<td class="tdquantity"><input style="padding: 5px; border-radius: 10px" type="number" min="1" max="99"></td>
-						</tr>
-						-->
-					</table>
-					<br>
-					<input style="padding: 10px; border: 0; border-radius: 10px" type="submit" name="btn_submit">
-				</form>
+                    <form method="post" action="#">
+                            <table class="modaltable" id="cart">
+                                    <tr>
+                                            <th>Order</th>
+                                            <th>Qty</th>
+                                    </tr>
+                            </table>
+                            <br>
+                            <input style="padding: 10px; border: 0; border-radius: 10px" type="submit" name="btn_submit">
+                    </form>
             </div>
         </div>
 

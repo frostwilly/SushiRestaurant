@@ -12,7 +12,7 @@ body{
     position: absolute;
     top:50%;
     left: 50%;
-    transform: translateX(-50%) translateY(-60%);
+    transform: translateX(-50%) translateY(-50%);
 }
 
 .employeeInput{
@@ -27,17 +27,24 @@ body{
     color: white;
 }
 
-.checkbilltable{
+.tabledivoverflow{
     width: 50%;
+    max-height: 60%;
+    overflow: auto;
+}
+
+.tabledivoverflow table{
+    width: 100%;
+    padding: 20px;
 }
 
 @media screen  and (max-width: 1000px){
-    .checkbilltable{
+    .tabledivoverflow{
         width: 80%;
     }
 }
 
-.checkbilltable th{
+.tabledivoverflow th{
     text-align: left;
 }
 
@@ -56,11 +63,32 @@ body{
 .tablebackgroundbordered{
     background-color: rgba(255,255,255,0.7);
     border-radius: 10px;
-    padding: 20px;
     box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.4);
 }
 
 .logoutbutton{
     float: right;
     margin: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #d1d1d1; 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #919191; 
 }

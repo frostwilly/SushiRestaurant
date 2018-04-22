@@ -27,7 +27,7 @@ and open the template in the editor.
 					if($employee->getJobTitle() == 'cashier')
 						header('Location: cashier.php');
 					else if($employee->getJobTitle() == 'waiter')
-						header('Location: cashier.php');
+						header('Location: waiter.php');
 					else
 						header('Location: chef.php');
 				}
