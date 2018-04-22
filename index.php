@@ -18,7 +18,7 @@ and open the template in the editor.
 		?>
         <table class='tableverticalhorizontalcenter'>
             <tr><th><h1>Sushi Restaurant</h1></th></tr>
-            <tr><th><br><button class="employeeInput woodbutton shadowbox" onclick="location.href = 'customerOrder.php'">Customer</button></th></tr>
+            <tr><th><br><button class="employeeInput woodbutton shadowbox" onclick="location.href = 'customerLogin.php'">Customer</button></th></tr>
             <tr><th><br><button class="employeeInput woodbutton shadowbox" onclick="location.href = 'employeeLogin.php'">Employee</button></th></tr>
         </table>
     </body>
