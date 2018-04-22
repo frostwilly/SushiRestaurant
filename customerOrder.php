@@ -12,13 +12,6 @@
 		<script src="javascript/jquery-3.3.1.min.js"></script>
 		<script src="javascript/cart.js"></script>
 		
-        <div class="header shadowbox">
-            <i onclick="callWaiter()" class="material-icons md-light md-48">notifications</i>
-            <i id="cartBtn" class="material-icons md-light md-48">shopping_cart</i>
-            <i id="billBtn" class="material-icons md-light md-48">format_list_numbered</i>
-        </div>
-        <div style="margin-bottom: 50px"></div>
-		
 		<?php
 			include_once("model/Guest.php");
 			session_start();
@@ -43,6 +36,19 @@
 			$regulerIterator = new RegulerMenuListIterator($data);
 		?>
 		
+        <div class="header shadowbox">
+            <i onclick="callWaiter()" class="material-icons md-light md-48">notifications</i>
+            <i id="cartBtn" class="material-icons md-light md-48">shopping_cart</i>
+            <i id="billBtn" class="material-icons md-light md-48">format_list_numbered</i>
+        </div>
+        <button class="employeeInput woodbutton shadowbox logoutbutton"
+                onclick="location.href = 'index.php'"
+                onmouseover="this.innerHTML='LOGOUT'"
+                onmouseout="this.innerHTML='<?= strtoupper("table ". $id) ?>'">
+                <?= strtoupper("table ". $id) ?>
+        </button>
+        <div style="margin-bottom: 50px"></div>
+                
         <?php include_once './promoMenu.php'; ?>
         <?php include_once './regulerMenu.php'; ?>
         

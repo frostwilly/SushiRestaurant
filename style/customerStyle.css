@@ -147,3 +147,17 @@ However, delay the fade out process for 2.5 seconds */
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
+
+.logoutbutton{
+    position: fixed;
+    border: 0;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+    background-color: white;
+    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.4);
+    top: 0;
+    right: 0;
+    margin: 7px;
+    z-index: 100;
+}

@@ -5,6 +5,19 @@
         <link rel="stylesheet" type="text/css" href="./style/employeeStyle.css">
     </head>
     <body>
+        <?php
+            include_once 'model/Employee.php';
+            session_start();
+            $employee = $_SESSION['employee'];
+            $username = $employee->getUsername();
+        ?>
+        <button class="employeeInput woodbutton shadowbox logoutbutton"
+                onclick="location.href = 'index.php'"
+                onmouseover="this.innerHTML='LOGOUT'"
+                onmouseout="this.innerHTML='<?= strtoupper($username) ?>'">
+            <?= strtoupper($username) ?>
+        </button>
+        
         <form method="post">
             <table class="checkbilltable tableverticalhorizontalcenter tablebackgroundbordered">
                 <tr><th colspan="4"><h1>Chef</h1></th></tr>
