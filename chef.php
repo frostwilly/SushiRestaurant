@@ -18,12 +18,12 @@
                     <?= strtoupper($username) ?>
         </button>
 
-        <form method="post">
+        <form method="post" action="chefCookingProcess.php">
             <div class="tabledivoverflow tableverticalhorizontalcenter tablebackgroundbordered">
                 <table>
                     <tr><th colspan="4"><h1>Chef</h1></th></tr>
                     <tr>
-                        <th>Order ID</th>
+                        <th>Table ID</th>
                         <th>Food Name</th>
                         <th>Quantity</th>
                         <th></th>
@@ -32,43 +32,25 @@
                         <td>1</td>
                         <td>foodA</td>
                         <td>3</td>
-                        <td><button class="employeeInput woodbutton shadowbox">Finish Cooking</button></td>
+                        <td><button type="submit" class="employeeInput woodbutton shadowbox">Cook This</button></td>
                     </tr>
                     <tr>
                         <td>1</td>
                         <td>foodB</td>
                         <td>1</td>
-                        <td><button class="employeeInput woodbutton shadowbox">Finish Cooking</button></td>
+                        <td><button type="submit" class="employeeInput woodbutton shadowbox">Cook This</button></td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>foodB</td>
+                        <td>drinkB</td>
                         <td>1</td>
-                        <td><button class="employeeInput woodbutton shadowbox">Finish Cooking</button></td>
+                        <td><button type="submit" class="employeeInput woodbutton shadowbox">Cook This</button></td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>foodB</td>
+                        <td>foodC</td>
                         <td>1</td>
-                        <td><button class="employeeInput woodbutton shadowbox">Finish Cooking</button></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>foodB</td>
-                        <td>1</td>
-                        <td><button class="employeeInput woodbutton shadowbox">Finish Cooking</button></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>foodB</td>
-                        <td>1</td>
-                        <td><button class="employeeInput woodbutton shadowbox">Finish Cooking</button></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>foodB</td>
-                        <td>1</td>
-                        <td><button class="employeeInput woodbutton shadowbox">Finish Cooking</button></td>
+                        <td><button type="submit" class="employeeInput woodbutton shadowbox">Cook This</button></td>
                     </tr>
                 </table>
             </div>
