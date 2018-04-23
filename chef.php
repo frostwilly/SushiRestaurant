@@ -70,9 +70,6 @@
                         <td>1</td>
                         <td><button class="employeeInput woodbutton shadowbox">Finish Cooking</button></td>
                     </tr>
-                    <tr>
-                        <th colspan="4"><br><input class='employeeInput woodbutton shadowbox' type='submit' value='Payment'></th>
-                    </tr>
                 </table>
             </div>
         </form>

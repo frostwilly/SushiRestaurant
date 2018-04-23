@@ -10,32 +10,34 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./style/employeeStyle.css">
+        <script src="./javascript/employeesnackbar.js"></script>
     </head>
     <body>
-		<?php
-			session_start();
-			require_once 'controller/rb.php';
-			R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
-			include_once("controller/EmployeeDAO.php");
-			
-			if(isset($_POST['btn_login']))
-			{
-				$employee = EmployeeDAO::getOne($_POST['username'], $_POST{'password'});
-				if($employee != null)
-				{
-					$_SESSION['employee'] = $employee;
-					if($employee->getJobTitle() == 'cashier')
-						header('Location: cashier.php');
-					else if($employee->getJobTitle() == 'waiter')
-						header('Location: waiter.php');
-					else
-						header('Location: chef.php');
-				}
-				else
-					echo "<script type='text/javascript'>alert('Wrong username or password!');</script>";
-			}
-		?>
-	
+        <!-- The Snackbar for item added to cart -->
+        <div id="snackbar"></div>
+
+        <?php
+        session_start();
+        require_once 'controller/rb.php';
+        R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
+        include_once("controller/EmployeeDAO.php");
+
+        if (isset($_POST['btn_login'])) {
+            $employee = EmployeeDAO::getOne($_POST['username'], $_POST{'password'});
+            if ($employee != null) {
+                $_SESSION['employee'] = $employee;
+                if ($employee->getJobTitle() == 'cashier')
+                    header('Location: cashier.php');
+                else if ($employee->getJobTitle() == 'waiter')
+                    header('Location: waiter.php');
+                else
+                    header('Location: chef.php');
+            } else {
+                echo "<script>snackbarAnimate('Wrong Username or Password.')</script>";
+            }
+        }
+        ?>
+
         <form method="post" action="#">
             <table class="tableverticalhorizontalcenter">
                 <tr><th><h1>Login</h1></th></tr>
