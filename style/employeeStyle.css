@@ -27,6 +27,10 @@ body{
     color: white;
 }
 
+.woodbutton:hover{
+    cursor: pointer;
+}
+
 .tabledivoverflow{
     width: 50%;
     max-height: 60%;
