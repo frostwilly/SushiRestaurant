@@ -17,6 +17,7 @@
 			R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
 			include_once("controller/MenuDAO.php");
 			include_once("controller/OrderDAO.php");
+			include_once("controller/CookOrderDAO.php");
 			include_once("model/Guest.php");
 			include_once('model/PromoMenuListIterator.php');
 			include_once('model/RegulerMenuListIterator.php');
@@ -92,6 +93,7 @@
 						if(isset($_POST['btn_submit']))
 						{
 							$o = new OrderDAO();
+							$c = new CookOrderDAO();
 							$grandTotal = 0;
 							foreach($_POST['id'] as $key => $value)
 							{
@@ -99,7 +101,10 @@
 								$qty = $_POST['qty'][$key] != "" ? $_POST['qty'][$key] : 0;
 								$total = $data->getPrice()*$qty;
 								$grandTotal += $total;
-								$o->insert($id, $value, $qty);
+								if($qty != 0)
+								{
+									$orderId = $o->insert($id, $value, $qty);
+									$c->insert($orderId, 'waiting', null);
 								?>
 								
 					<tr>
@@ -110,6 +115,7 @@
                     </tr>
 								
 								<?php
+								}
 							}
 							session_unset();
 							$_SESSION['guest'] = $guest;
