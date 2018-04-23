@@ -21,15 +21,18 @@
         <form method="post">
             <div class="tabledivoverflow tableverticalhorizontalcenter tablebackgroundbordered">
                 <table>
-                    <tr><th><h1>Waiter</h1></th></tr>
+                    <tr><th colspan="2"><h1>Waiter</h1></th></tr>
                     <tr>
                         <th>Table ID</th>
+                        <th></th>
                     </tr>
                     <tr>
-                        <td>1</td>
+                        <td>Table 1 Called</td>
+                        <td><button type="submit" class="employeeInput woodbutton shadowbox">OK</button></td>
                     </tr>
                     <tr>
-                        <td>1</td>
+                        <td>Table 2 Called</td>
+                        <td><button type="submit" class="employeeInput woodbutton shadowbox">OK</button></td>
                     </tr>
                 </table>
             </div>
