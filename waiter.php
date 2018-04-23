@@ -6,10 +6,18 @@
     </head>
     <body>
         <?php
+		require_once 'controller/rb.php';
+		R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
         include_once 'model/Employee.php';
         session_start();
         $employee = $_SESSION['employee'];
         $username = $employee->getUsername();
+		
+		if(isset($_POST['btn_submit']))
+		{
+			R::exec('delete from notification where id = '.$_POST['id']);
+			header('Location: waiter.php');
+		}
         ?>
         <button class="employeeInput woodbutton shadowbox logoutbutton"
                 onclick="location.href = 'index.php'"
@@ -18,7 +26,7 @@
                     <?= strtoupper($username) ?>
         </button>
 
-        <form method="post">
+        <form method="post" action="#">
             <div class="tabledivoverflow tableverticalhorizontalcenter tablebackgroundbordered">
                 <table>
                     <tr><th colspan="2"><h1>Waiter</h1></th></tr>
@@ -26,14 +34,21 @@
                         <th>Table ID</th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>Table 1 Called</td>
-                        <td><button type="submit" class="employeeInput woodbutton shadowbox">OK</button></td>
+					<?php
+						$list = R::findAll('notification');
+						foreach($list as $key => $value)
+						{
+							?>
+					<input type="hidden" name="id" value="<?php echo $key; ?>">
+					<tr>
+                        <td>Table <?php echo $key; ?> Called</td>
+                        <td><button type="submit" name='btn_submit' class="employeeInput woodbutton shadowbox">OK</button></td>
                     </tr>
-                    <tr>
-                        <td>Table 2 Called</td>
-                        <td><button type="submit" class="employeeInput woodbutton shadowbox">OK</button></td>
-                    </tr>
+							<?php
+						}
+						$_SESSION['employee'] = $employee;
+						header('refresh: 1; url= waiter.php');
+					?>
                 </table>
             </div>
         </form>

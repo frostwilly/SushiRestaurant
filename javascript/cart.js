@@ -53,14 +53,26 @@ $(document).on("click", "div.menubox", function () {
 });
 
 function callWaiter(){
-    var y = document.getElementById("snackbar");
+	var y = document.getElementById("snackbar");
 
-    // Add the "show" class to DIV
-    y.innerHTML = "Call waiter done.";
-    y.className = "show";
+	// Add the "show" class to DIV
+	y.innerHTML = "Call waiter done.";
+	y.className = "show";
 
-    // After 3 seconds, remove the show class from DIV
-    setTimeout(function () {
-        y.className = y.className.replace("show", "");
-    }, 3000);
+	// After 3 seconds, remove the show class from DIV
+	setTimeout(function () {
+		y.className = y.className.replace("show", "");
+	}, 3000);
+	
+	myAjax();
+}
+
+function myAjax() {
+    $.ajax({
+        type: "POST",
+        url: 'customerOrder.php',
+        data:{action:'call_this'},
+        success:function(html) {
+        }
+    });
 }

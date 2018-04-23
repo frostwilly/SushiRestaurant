@@ -29,6 +29,11 @@
 				$id = $guest->getId();
 			}
 			
+			if(isset($_POST['action']))
+			{
+				R::exec('insert into notification values('.$id.')');
+			}
+			
 			$m = new MenuDAO();
 			$data = $m->getAll();
 			$promoIterator = new PromoMenuListIterator($data);
