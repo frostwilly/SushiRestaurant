@@ -6,10 +6,25 @@
     </head>
     <body>
         <?php
-        include_once 'model/Employee.php';
-        session_start();
-        $employee = $_SESSION['employee'];
-        $username = $employee->getUsername();
+			require_once 'controller/rb.php';
+			R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
+			include_once 'model/Employee.php';
+			include_once 'model/Order.php';
+			include_once 'model/MenuItem.php';
+			include_once 'controller/OrderDAO.php';
+			include_once("controller/MenuDAO.php");
+			include_once("controller/PaymentDAO.php");
+			session_start();
+			$employee = $_SESSION['employee'];
+			$username = $employee->getUsername();
+			
+			if(isset($_POST['btn_pay']))
+			{
+				PaymentDAO::insert('cash', $employee->getId(), $_POST['guestId']);
+				session_unset();
+				$_SESSION['employee'] = $employee;
+				header('Location: cashier.php');
+			}
         ?>
         <button class="employeeInput woodbutton shadowbox logoutbutton"
                 onclick="location.href = 'index.php'"
@@ -18,7 +33,7 @@
                     <?= strtoupper($username) ?>
         </button>
 
-        <form method="post">
+        <form method="post" action="#">
             <div class="tabledivoverflow tableverticalhorizontalcenter tablebackgroundbordered">
                 <table>
                     <tr><th colspan="4"><h1>Bill</h1></th></tr>
@@ -28,49 +43,48 @@
                         <th>Qty</th>
                         <th>Total</th>
                     </tr>
+					<?php
+						if(isset($_POST['btn_submit']))
+						{
+							$o = new OrderDAO();
+							$m = new MenuDAO();
+							$id = $_POST['id'];
+							$list = $o->getAll($id);
+							if($list == null)
+							{
+								$_SESSION['message'] = 'there is no order for table '.$id;
+								header('Location: cashier.php');
+							}
+							
+							$grandTotal = 0;
+							foreach($list as $key => $value)
+							{
+								$data = $m->getOne($value->getMenuId());
+								$total = $data->getPrice()*$value->getQuantity();
+								$grandTotal += $total;
+								?>
                     <tr>
-                        <td>Pika</td>
-                        <td>Rp. 10.000</td>
-                        <td class="tdquantity"><input class="employeeInput shadowbox" type="number" min="1" max="99" value="1"></td>
-                        <td>Rp. 10.000</td>
+                        <td><?php echo $data->getName(); ?></td>
+                        <td>Rp. <?php echo $data->getPrice(); ?></td>
+                        <td class="tdquantity"><input class="employeeInput shadowbox" type="number" min="1" max="99" value="<?php echo $value->getQuantity(); ?>"></td>
+                        <td>Rp. <?php echo $total; ?></td>
                     </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td>Rp. 30.000</td>
-                        <td class="tdquantity"><input class="employeeInput shadowbox" type="number" min="1" max="99" value="10"></td>
-                        <td>Rp. 300.000</td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td>Rp. 30.000</td>
-                        <td class="tdquantity"><input class="employeeInput shadowbox" type="number" min="1" max="99" value="10"></td>
-                        <td>Rp. 300.000</td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td>Rp. 30.000</td>
-                        <td class="tdquantity"><input class="employeeInput shadowbox" type="number" min="1" max="99" value="10"></td>
-                        <td>Rp. 300.000</td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td>Rp. 30.000</td>
-                        <td class="tdquantity"><input class="employeeInput shadowbox" type="number" min="1" max="99" value="10"></td>
-                        <td>Rp. 300.000</td>
-                    </tr>
-                    <tr>
-                        <td>chu</td>
-                        <td>Rp. 30.000</td>
-                        <td class="tdquantity"><input class="employeeInput shadowbox" type="number" min="1" max="99" value="10"></td>
-                        <td>Rp. 300.000</td>
-                    </tr>
+								<?php
+							}
+						}
+					?>
                     <tr><td class="borderedunderline" colspan="4"></td></tr>
                     <tr>
                         <td colspan="3">Grand total</td>
-                        <td>Rp. 310.000</td>
+                        <td>Rp. <?php 
+                            if(isset($grandTotal)){
+                                echo $grandTotal;
+                            }
+                        ?></td>
                     </tr>
+					<input type="hidden" name="guestId" value="<?php echo $id; ?>">
                     <tr>
-                        <th colspan="4"><br><input class='employeeInput woodbutton shadowbox' type='submit' value='Payment'></th>
+                        <th colspan="4"><br><input class='employeeInput woodbutton shadowbox' type='submit' name="btn_pay" value='Payment'></th>
                     </tr>
                 </table>
             </div>

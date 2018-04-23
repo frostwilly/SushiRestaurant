@@ -24,9 +24,6 @@ and open the template in the editor.
 					echo "<script type='text/javascript'>alert('Table $id is not available right now!');</script>";
 				} else {
 					$_SESSION['guest'] = $guest;
-					//echo "<pre>";
-					//print_r($guest);
-					//echo "</pre>";
 					header('Location: customerOrder.php');
 				}
 			}
@@ -35,8 +32,8 @@ and open the template in the editor.
         <form method="post" action="#">
             <table class="tableverticalhorizontalcenter">
                 <tr><th><h1>Login</h1></th></tr>
-                <tr><td>Table ID</td></tr>
-                <tr><td><input class='employeeInput shadowbox' type="text" name="id" placeholder="Table's ID"></td><tr>
+                <tr><td>Table Number</td></tr>
+                <tr><td><input class='employeeInput shadowbox' type="text" name="id" placeholder="Table Number"></td><tr>
                 <tr><th><br><input class='employeeInput woodbutton shadowbox' type='submit' value='Login' name="btn_login"></th></tr>
             </table>
         </form>

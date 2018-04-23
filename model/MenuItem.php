@@ -17,9 +17,5 @@
 		function getName(){return $this->name;}
 		function getPrice(){return $this->price;}
 		function getCategory(){return $this->category;}
-		function getNameAndPrice()
-		{
-			return $this->getName() . ' by ' . $this->getPrice();
-		}
 	}
 ?>
