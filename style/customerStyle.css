@@ -33,6 +33,7 @@ body{
     position: relative;
     float: left;
     margin: 8px;
+    overflow: hidden;
 }
 
 @media screen and (orientation:landscape){
