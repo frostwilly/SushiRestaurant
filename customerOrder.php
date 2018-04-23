@@ -13,21 +13,19 @@
 		<script src="javascript/cart.js"></script>
 		
 		<?php
-			include_once("model/Guest.php");
-			session_start();
 			require_once 'controller/rb.php';
 			R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
 			include_once("controller/MenuDAO.php");
 			include_once("controller/OrderDAO.php");
-			include_once("controller/MenuOrderDAO.php");
+			include_once("model/Guest.php");
 			include_once('model/PromoMenuListIterator.php');
 			include_once('model/RegulerMenuListIterator.php');
+			session_start();
 			
 			if(isset($_SESSION['guest']))
 			{
 				$guest = $_SESSION['guest'];
 				$id = $guest->getId();
-				echo "Welcome! This is table $id";
 			}
 			
 			$m = new MenuDAO();
@@ -94,16 +92,14 @@
 						if(isset($_POST['btn_submit']))
 						{
 							$o = new OrderDAO();
-							$mo = new MenuOrderDAO();
 							$grandTotal = 0;
-							$id = $o->insert(1);
 							foreach($_POST['id'] as $key => $value)
 							{
 								$data = $m->getOne($value);
 								$qty = $_POST['qty'][$key] != "" ? $_POST['qty'][$key] : 0;
 								$total = $data->getPrice()*$qty;
 								$grandTotal += $total;
-								$mo->insert($id, $value, $qty, 2);
+								$o->insert($id, $value, $qty);
 								?>
 								
 					<tr>
@@ -116,6 +112,7 @@
 								<?php
 							}
 							session_unset();
+							$_SESSION['guest'] = $guest;
 						}
 					?>
 					

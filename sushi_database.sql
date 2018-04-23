@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2018 at 05:30 PM
+-- Generation Time: Apr 23, 2018 at 10:00 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -38,15 +38,6 @@ CREATE TABLE `cookorder` (
   `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `cookorder`
---
-
-INSERT INTO `cookorder` (`id`, `order_id`, `cooking_status`, `employee_id`) VALUES
-(1, 1, 'done', 3),
-(2, 2, 'on progress', 3),
-(3, 3, 'waiting', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -69,34 +60,6 @@ INSERT INTO `employees` (`id`, `username`, `password`, `job_title`) VALUES
 (1, 'Jeffry', '123', 'cashier'),
 (2, 'Abam', '123', 'waiter'),
 (3, 'Willy', '123', 'chef');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `menuorder`
---
-
-DROP TABLE IF EXISTS `menuorder`;
-CREATE TABLE `menuorder` (
-  `id` int(11) NOT NULL,
-  `order_id` int(11) DEFAULT NULL,
-  `menu_id` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `employee_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `menuorder`
---
-
-INSERT INTO `menuorder` (`id`, `order_id`, `menu_id`, `quantity`, `employee_id`) VALUES
-(1, 1, 1, 1, 2),
-(2, 1, 2, 1, 2),
-(3, 1, 4, 1, 2),
-(4, 2, 5, 2, 2),
-(5, 3, 6, 2, 2),
-(6, 3, 4, 2, 2),
-(7, 3, 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -133,17 +96,44 @@ INSERT INTO `menus` (`id`, `name`, `price`, `category`) VALUES
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `table_number` int(11) NOT NULL
+  `guest_id` int(11) DEFAULT NULL,
+  `menu_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `table_number`) VALUES
-(1, 1),
-(2, 2),
-(3, 3);
+INSERT INTO `orders` (`id`, `guest_id`, `menu_id`, `quantity`) VALUES
+(4, 2, 5, 2),
+(5, 3, 6, 2),
+(6, 3, 4, 2),
+(7, 3, 2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paid`
+--
+
+DROP TABLE IF EXISTS `paid`;
+CREATE TABLE `paid` (
+  `id` int(11) NOT NULL,
+  `guest_id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `paid`
+--
+
+INSERT INTO `paid` (`id`, `guest_id`, `menu_id`, `quantity`, `date`) VALUES
+(5, 1, 1, 1, '2018-04-23 07:53:51'),
+(6, 1, 2, 1, '2018-04-23 07:53:51'),
+(7, 1, 4, 1, '2018-04-23 07:53:51');
 
 -- --------------------------------------------------------
 
@@ -157,15 +147,31 @@ CREATE TABLE `payments` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `payment_method` varchar(20) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
-  `order_id` int(11) DEFAULT NULL
+  `guest_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`id`, `date`, `payment_method`, `employee_id`, `order_id`) VALUES
-(1, '2018-04-16 20:53:51', 'cash', 1, 1);
+INSERT INTO `payments` (`id`, `date`, `payment_method`, `employee_id`, `guest_id`) VALUES
+(1, '2018-04-16 20:53:51', 'cash', 1, 1),
+(3, '2018-04-23 14:53:51', 'cash', 1, 1);
+
+--
+-- Triggers `payments`
+--
+DROP TRIGGER IF EXISTS `pay1`;
+DELIMITER $$
+CREATE TRIGGER `pay1` BEFORE INSERT ON `payments` FOR EACH ROW INSERT INTO paid (guest_id, menu_id, quantity)
+  select guest_id, menu_id, quantity from orders where guest_id = new.guest_id
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `pay2`;
+DELIMITER $$
+CREATE TRIGGER `pay2` AFTER INSERT ON `payments` FOR EACH ROW delete from orders where guest_id = new.guest_id
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
@@ -186,15 +192,6 @@ ALTER TABLE `employees`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `menuorder`
---
-ALTER TABLE `menuorder`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `menu_orderfk1` (`order_id`),
-  ADD KEY `menu_orderfk2` (`menu_id`),
-  ADD KEY `menu_orderfk3` (`employee_id`);
-
---
 -- Indexes for table `menus`
 --
 ALTER TABLE `menus`
@@ -204,15 +201,22 @@ ALTER TABLE `menus`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `menu_orderfk2` (`menu_id`);
+
+--
+-- Indexes for table `paid`
+--
+ALTER TABLE `paid`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `paid_fk` (`menu_id`);
 
 --
 -- Indexes for table `payments`
 --
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `payment_fk1` (`employee_id`),
-  ADD KEY `payment_fk2` (`order_id`);
+  ADD KEY `payment_fk1` (`employee_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -231,12 +235,6 @@ ALTER TABLE `employees`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `menuorder`
---
-ALTER TABLE `menuorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
@@ -246,13 +244,19 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `paid`
+--
+ALTER TABLE `paid`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -266,19 +270,22 @@ ALTER TABLE `cookorder`
   ADD CONSTRAINT `cookingorder_fk2` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `menuorder`
+-- Constraints for table `orders`
 --
-ALTER TABLE `menuorder`
-  ADD CONSTRAINT `menu_orderfk1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `menu_orderfk2` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `menu_orderfk3` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE;
+ALTER TABLE `orders`
+  ADD CONSTRAINT `menu_orderfk2` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `paid`
+--
+ALTER TABLE `paid`
+  ADD CONSTRAINT `paid_fk` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `payments`
 --
 ALTER TABLE `payments`
-  ADD CONSTRAINT `payment_fk1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `payment_fk2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `payment_fk1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
