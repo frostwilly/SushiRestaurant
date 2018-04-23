@@ -38,7 +38,3 @@ window.onclick = function (event) {
         modalBill.style.display = "none";
     }
 }
-
-function foodClick(foodID) {
-    alert(foodID);
-}

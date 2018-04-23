@@ -3,25 +3,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sushi Restaurant</title>
         <link rel="stylesheet" type="text/css" href="./style/employeeStyle.css">
+        <script src="./javascript/employeesnackbar.js"></script>
     </head>
     <body>
+        <!-- The Snackbar for item added to cart -->
+        <div id="snackbar"></div>
+
         <?php
-            include_once 'model/Employee.php';
-            session_start();
-            $employee = $_SESSION['employee'];
-            $username = $employee->getUsername();
-			
-			if(isset($_SESSION['message']))
-			{
-				echo "<script type='text/javascript'>alert('".$_SESSION['message']."');</script>";
-				unset($_SESSION['message']);
-			}
+        include_once 'model/Employee.php';
+        session_start();
+        $employee = $_SESSION['employee'];
+        $username = $employee->getUsername();
+
+        if (isset($_SESSION['message'])) {
+            echo "<script type='text/javascript'>snackbarAnimate('" . ucfirst($_SESSION['message']) . "')</script>";
+            unset($_SESSION['message']);
+        }
         ?>
         <button class="employeeInput woodbutton shadowbox logoutbutton"
                 onclick="location.href = 'index.php'"
-                onmouseover="this.innerHTML='LOGOUT'"
-                onmouseout="this.innerHTML='<?= strtoupper($username) ?>'">
-            <?= strtoupper($username) ?>
+                onmouseover="this.innerHTML = 'LOGOUT'"
+                onmouseout="this.innerHTML = '<?= strtoupper($username) ?>'">
+                    <?= strtoupper($username) ?>
         </button>
 
         <form method="post" action="cashierCheckBill.php">
