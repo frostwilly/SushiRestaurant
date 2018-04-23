@@ -6,7 +6,12 @@
     </head>
     <body>
         <?php
+		require_once 'controller/rb.php';
+		R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
         include_once 'model/Employee.php';
+		include_once("controller/MenuDAO.php");
+		include_once("controller/OrderDAO.php");
+		include_once("controller/CookOrderDAO.php");
         session_start();
         $employee = $_SESSION['employee'];
         $username = $employee->getUsername();
@@ -28,30 +33,29 @@
                         <th>Quantity</th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>foodA</td>
-                        <td>3</td>
-                        <td><button type="submit" class="employeeInput woodbutton shadowbox">Cook This</button></td>
+					<?php
+						$list = CookOrderDAO::getAll();
+						foreach($list as $key => $value)
+						{
+							if($value->getCookingStatus() == 'waiting')
+							{
+								$order = OrderDAO::getOne($value->getOrderId());
+								$menu = MenuDAO::getOne($order->menu_id);
+							?>
+					<input type="hidden" name="id" value="<?php echo $value->getId(); ?>">
+					<input type="hidden" name="tableId" value="<?php echo $order->guest_id; ?>">
+					<input type="hidden" name="name" value="<?php echo $menu->getName(); ?>">
+					<input type="hidden" name="quantity" value="<?php echo $order->quantity; ?>">
+					<tr>
+                        <td><?php echo $order->guest_id; ?></td>
+                        <td><?php echo $menu->getName(); ?></td>
+                        <td><?php echo $order->quantity; ?></td>
+                        <td><button type="submit" name="btn_cook" class="employeeInput woodbutton shadowbox">Cook This</button></td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>foodB</td>
-                        <td>1</td>
-                        <td><button type="submit" class="employeeInput woodbutton shadowbox">Cook This</button></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>drinkB</td>
-                        <td>1</td>
-                        <td><button type="submit" class="employeeInput woodbutton shadowbox">Cook This</button></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>foodC</td>
-                        <td>1</td>
-                        <td><button type="submit" class="employeeInput woodbutton shadowbox">Cook This</button></td>
-                    </tr>
+							<?php
+							}
+						}
+					?>
                 </table>
             </div>
         </form>

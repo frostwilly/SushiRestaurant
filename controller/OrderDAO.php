@@ -24,5 +24,10 @@
 			}
 			return $list;
 		}
+		
+		function getOne($id)
+		{
+			return R::load('orders', $id);
+		}
 	}
 ?>

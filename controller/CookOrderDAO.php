@@ -13,7 +13,15 @@
 			return R::store($cookorder);
 		}
 		
-		function getAll($id)
+		function update($id, $cookingStatus, $employeeId)
+		{
+			$item = R::load('cookorder', $id);
+			$item->cooking_status = $cookingStatus;
+			$item->employee_id = $employeeId;
+			R::store($item);
+		}
+		
+		function getAll()
 		{
 			$result = R::findAll('cookorder');
 			$list = array();
