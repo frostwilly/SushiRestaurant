@@ -41,9 +41,7 @@
             <i id="billBtn" class="material-icons md-light md-48">format_list_numbered</i>
         </div>
         <button class="employeeInput woodbutton shadowbox logoutbutton"
-                onclick="location.href = 'index.php'"
-                onmouseover="this.innerHTML='LOGOUT'"
-                onmouseout="this.innerHTML='<?= strtoupper("table ". $id) ?>'">
+                onclick="location.href = 'index.php'">
                 <?= strtoupper("table ". $id) ?>
         </button>
         <div style="margin-bottom: 50px"></div>
@@ -69,7 +67,7 @@
                                     </tr>
                             </table>
                             <br>
-                            <input style="padding: 10px; border: 0; border-radius: 10px" type="submit" name="btn_submit">
+                            <input style="padding: 10px; border: 0; border-radius: 10px;" onmouseover="this.style.cursor='pointer'" type="submit" name="btn_submit">
                     </form>
             </div>
         </div>
