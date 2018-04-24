@@ -1,7 +1,8 @@
 <?php
 	//include('MenuList.php');
+	include_once('MenuIterator.php');
 	
-	class RegulerMenuListIterator {
+	class RegulerMenuListIterator implements MenuIterator {
 		protected $menuList;
 		protected $currentMenu = 0;
 
