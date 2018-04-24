@@ -9,11 +9,11 @@ and open the template in the editor.
         <title>Customer Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="./style/employeeStyle.css">
+        <link rel="stylesheet" type="text/css" href="../style/employeeStyle.css">
     </head>
     <body>
 		<?php
-			include_once("model/Guest.php");
+			include_once("../model/Guest.php");
 			session_start();
 			
 			if(isset($_POST['btn_login']))

@@ -9,8 +9,8 @@ and open the template in the editor.
         <title>Employee Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="./style/employeeStyle.css">
-        <script src="./javascript/employeesnackbar.js"></script>
+        <link rel="stylesheet" type="text/css" href="../style/employeeStyle.css">
+        <script src="../javascript/employeesnackbar.js"></script>
     </head>
     <body>
         <!-- The Snackbar for item added to cart -->
@@ -18,9 +18,9 @@ and open the template in the editor.
 
         <?php
         session_start();
-        require_once 'controller/rb.php';
+        require_once '../controller/rb.php';
         R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
-        include_once("controller/EmployeeDAO.php");
+        include_once("../controller/EmployeeDAO.php");
 
         if (isset($_POST['btn_login'])) {
             $employee = EmployeeDAO::getOne($_POST['username'], $_POST{'password'});

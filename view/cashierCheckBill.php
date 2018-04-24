@@ -2,22 +2,22 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sushi Restaurant</title>
-        <link rel="stylesheet" type="text/css" href="./style/employeeStyle.css">
-        <script src="./javascript/employeesnackbar.js"></script>
+        <link rel="stylesheet" type="text/css" href="../style/employeeStyle.css">
+        <script src="../javascript/employeesnackbar.js"></script>
     </head>
     <body>
         <!-- The Snackbar for item added to cart -->
         <div id="snackbar"></div>
 
         <?php
-        require_once 'controller/rb.php';
+        require_once '../controller/rb.php';
         R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
-        include_once 'model/Employee.php';
-        include_once 'model/Order.php';
-        include_once 'model/MenuItem.php';
-        include_once 'controller/OrderDAO.php';
-        include_once("controller/MenuDAO.php");
-        include_once("controller/PaymentDAO.php");
+        include_once '../model/Employee.php';
+        include_once '../model/Order.php';
+        include_once '../model/MenuItem.php';
+        include_once '../controller/OrderDAO.php';
+        include_once("../controller/MenuDAO.php");
+        include_once("../controller/PaymentDAO.php");
         session_start();
         $employee = $_SESSION['employee'];
         $username = $employee->getUsername();
@@ -31,7 +31,7 @@
         } else {
             ?>
             <button class="employeeInput woodbutton shadowbox logoutbutton"
-                    onclick="location.href = 'index.php'"
+                    onclick="location.href = '../index.php'"
                     onmouseover="this.innerHTML = 'LOGOUT'"
                     onmouseout="this.innerHTML = '<?= strtoupper($username) ?>'">
                         <?= strtoupper($username) ?>

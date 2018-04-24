@@ -1,6 +1,6 @@
 <?php
 	require_once 'rb.php';
-	include_once('model/Order.php');
+	include_once('../model/Order.php');
 	
 	class OrderDAO
 	{		

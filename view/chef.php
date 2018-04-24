@@ -2,22 +2,22 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sushi Restaurant</title>
-        <link rel="stylesheet" type="text/css" href="./style/employeeStyle.css">
+        <link rel="stylesheet" type="text/css" href="../style/employeeStyle.css">
     </head>
     <body>
         <?php
-		require_once 'controller/rb.php';
+		require_once '../controller/rb.php';
 		R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
-        include_once 'model/Employee.php';
-		include_once("controller/MenuDAO.php");
-		include_once("controller/OrderDAO.php");
-		include_once("controller/CookOrderDAO.php");
+                include_once '../model/Employee.php';
+		include_once("../controller/MenuDAO.php");
+		include_once("../controller/OrderDAO.php");
+		include_once("../controller/CookOrderDAO.php");
         session_start();
         $employee = $_SESSION['employee'];
         $username = $employee->getUsername();
         ?>
         <button class="employeeInput woodbutton shadowbox logoutbutton"
-                onclick="location.href = 'index.php'"
+                onclick="location.href = '../index.php'"
                 onmouseover="this.innerHTML = 'LOGOUT'"
                 onmouseout="this.innerHTML = '<?= strtoupper($username) ?>'">
                     <?= strtoupper($username) ?>

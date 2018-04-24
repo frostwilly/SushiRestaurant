@@ -1,7 +1,7 @@
 <?php
 	require_once 'rb.php';
-	include_once('model/MenuItem.php');
-	include_once('model/MenuList.php');
+	include_once('../model/MenuItem.php');
+	include_once('../model/MenuList.php');
 	
 	class MenuDAO
 	{

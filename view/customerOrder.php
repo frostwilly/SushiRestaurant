@@ -4,23 +4,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sushi Restaurant</title>
 
-        <link rel="stylesheet" type="text/css" href="./style/customerStyle.css">
-        <link rel="stylesheet" type="text/css" href="./style/modalbox.css">
+        <link rel="stylesheet" type="text/css" href="../style/customerStyle.css">
+        <link rel="stylesheet" type="text/css" href="../style/modalbox.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
-		<script src="javascript/jquery-3.3.1.min.js"></script>
-		<script src="javascript/cart.js"></script>
+		<script src="../javascript/jquery-3.3.1.min.js"></script>
+		<script src="../javascript/cart.js"></script>
 		
 		<?php
-			require_once 'controller/rb.php';
+			require_once '../controller/rb.php';
 			R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
-			include_once("controller/MenuDAO.php");
-			include_once("controller/OrderDAO.php");
-			include_once("controller/CookOrderDAO.php");
-			include_once("model/Guest.php");
-			include_once('model/PromoMenuListIterator.php');
-			include_once('model/RegulerMenuListIterator.php');
+			include_once("../controller/MenuDAO.php");
+			include_once("../controller/OrderDAO.php");
+			include_once("../controller/CookOrderDAO.php");
+			include_once("../model/Guest.php");
+			include_once('../model/PromoMenuListIterator.php');
+			include_once('../model/RegulerMenuListIterator.php');
 			session_start();
 			
 			if(isset($_SESSION['guest']))
@@ -46,13 +46,13 @@
             <i id="billBtn" class="material-icons md-light md-48">format_list_numbered</i>
         </div>
         <button class="employeeInput woodbutton shadowbox logoutbutton"
-                onclick="location.href = 'index.php'">
+                onclick="location.href = '../index.php'">
                 <?= strtoupper("table ". $id) ?>
         </button>
         <div style="margin-bottom: 50px"></div>
                 
-        <?php include_once './promoMenu.php'; ?>
-        <?php include_once './regulerMenu.php'; ?>
+        <?php include_once 'promoMenu.php'; ?>
+        <?php include_once 'regulerMenu.php'; ?>
         
         <!-- The Snackbar for item added to cart -->
         <div id="snackbar"></div>
@@ -137,6 +137,6 @@
                 </table>
             </div>
         </div>
-        <script src="./javascript/modalbox.js"></script>
+        <script src="../javascript/modalbox.js"></script>
     </body>
 </html>

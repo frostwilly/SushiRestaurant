@@ -1,6 +1,6 @@
 <?php
 	require_once 'rb.php';
-	include_once('model/Employee.php');
+	include_once('../model/Employee.php');
 	
 	class EmployeeDAO
 	{		
