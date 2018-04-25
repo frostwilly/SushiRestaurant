@@ -9,13 +9,15 @@
 		require_once '../controller/rb.php';
 		R::setup('mysql:host=localhost;dbname=sushi_database', 'root', '');
         include_once '../model/Employee.php';
+        include_once '../controller/NotificationDAO.php';
         session_start();
         $employee = $_SESSION['employee'];
         $username = $employee->getUsername();
+        $notification = new NotificationDAO();
 		
 		if(isset($_POST['btn_submit']))
 		{
-			R::exec('delete from notification where id = '.$_POST['id']);
+                        $notification->delete($_POST['id']);
 			header('Location: waiter.php');
 		}
         ?>
@@ -35,7 +37,7 @@
                         <th></th>
                     </tr>
 					<?php
-						$list = R::findAll('notification');
+						$list = $notification->getAll();
 						foreach($list as $key => $value)
 						{
 							?>

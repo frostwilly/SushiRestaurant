@@ -18,6 +18,7 @@
 			include_once("../controller/MenuDAO.php");
 			include_once("../controller/OrderDAO.php");
 			include_once("../controller/CookOrderDAO.php");
+			include_once("../controller/NotificationDAO.php");
 			include_once("../model/Guest.php");
 			include_once('../model/PromoMenuListIterator.php');
 			include_once('../model/RegulerMenuListIterator.php');
@@ -31,7 +32,8 @@
 			
 			if(isset($_POST['action']))
 			{
-				R::exec('insert into notification values('.$id.')');
+                            $notification = new NotificationDAO();
+                            $notification->insert($id);
 			}
 			
 			$m = new MenuDAO();
